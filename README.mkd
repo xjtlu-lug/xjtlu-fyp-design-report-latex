@@ -1,0 +1,19 @@
+# What's this?
+
+This is a LaTeX template for *specification and design report* (not the dissertation) of Xi'an Jiaotong-Liverpool University. Currently, only templates for bachelor degree is provided. 
+
+Contributions (Pull Requests/Issues/etc.) are welcome.
+
+# How to use?
+
+For Windows Users, [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) is recommended.
+
+For Linux Users, a [Makefile](Makefile) is provided. Simply run the following,
+```
+make pdf # for making pdf file
+# make clean # for cleaning
+```
+
+# Software License
+
+The logo of XJTLU (`img/xjtlu.jpg`) is owned by Xi'an Jiaotong-Liverpool University. Other files are under [Apache License 2.0](LICENSE)

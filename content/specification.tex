@@ -1,0 +1,109 @@
+\subsection{Project Description}
+On-line portfolio selection (OLPS) is a fundamental research problem in computational finance and an practical engineering task in financial engineering, where the goal is to achieve desired targets such as maximum cumulative return during a continuous period of time by continuously distributing the portfolio of various assets~\cite{li2014online}. Many machine learning techniques have been applied to predict the financial price movements such as reinforcement learning~\cite{moody1998performance, moody2001drl}, decision trees~\cite{tsang2004eddie}, neural networks (NN)~\cite{kimoto1990stock}, support vector machines (SVM)~\cite{tay2002modified}, genetic algorithms~\cite{mahfoud1996financial}. However, they mainly concentrate on the forecasting of future trend/price movements and trade a single asset via signals~\cite{borodin2000competitive}. On the other hand, this work considers multiple assets to trade and model the problem as an optimization of asset allocation with the aim of maximizing the final Accumulated Portfolio Return (APV).
+
+% Therefore, state-of-the-art performances have been achieved as demonstrated at Section~\ref{}.
+
+Our previous works~\cite{jiang2017cryptocurrency, jiang2017deep} have established the basic framework for OLPS with deep reinforcement learning, more specifically deterministic gradient policy (DPG). In this work, we aim to propose and implement an improved deep reinforcement learning framework for OLPS. To summarize, major contributions of this project will include: 
+\begin{enumerate}
+    \item Broaden the scope of the previous work to more financial markets including foreign exchange (forex), Exchange-traded Fund (ETF) and stock markets.
+    \item Add short and leverage positions to the framework.
+    \item Reduce transaction cost by optimizing bid-ask spread.
+    \item Explore other value functions such as Deep Q-Network (DQN) and Deep Deterministic Policy Gradient (DDPG), policy, reward, model and planning.
+    \item Integrate sentimental analysis such as online tweets to the framework.
+\end{enumerate}
+
+\subsection{Statement of Deliverable}
+
+We have released our previous works on Github and they are freely available online~\footnote{\url{https://github.com/ZhengyaoJiang/PGPortfolio}}. After that, part of the framwork has also been released as an Python package \textbf{mercurius}\footnote{\url{https://github.com/dexhunter/mercurius}} with additional features such as basic User Interface (UI) and plotting functionalities. An example usage of UCRP (described at Section~\ref{subsub: background}) is shown as following:
+
+\begin{lstlisting}[language=Python, caption=Example Usage of Mercurius]
+# Uniform Constant Rebalanced Portfolio
+
+from mercurius.strategy import ucrp
+
+up = ucrp()
+# custom input data with transaction cost 2.5%
+up.trade(input_data, tc=0.025) 
+# re: for returning the result
+# plot: for plotting the result
+result = up.finish(re=True, plot=True)
+# A list of portfolio values will be printed out
+print(result['portfolio'])
+\end{lstlisting}
+
+% Description of anticipated documentation and software
+However, the current python module only supports traditional machine learning algorithms. Therefore, it is necessary for this work to add more functionalities, documentation and unit test to the framework. The anticipated documentation will include a user manual with detailed examples on how to use the module, a walk-through for all the functionalities such as plotting graphs and tables. Although this module mainly servers as an engine for algorithmic trading with state-of-the-art machine learning techniques, it also contains a minimum viable product (MVP) UI powered by Flask Web Development Framework~\cite{Grinberg:2014:FWD:2621997}. The MVP UI monitors the backtest result and on-line trading. Since this project tries to apply Deep RL methods to different markets, multiple experiments will be conducted and an automated result analysis part is vital for shorten the time span of tests. Besides, as an old proverb goes,
+\begin{displayquote}
+"A picture is worth a thousand words."
+\end{displayquote}
+when trading in real time, graph shows more information than mere numbers. It is also anticipated that our package can better pre-process multiple datasets into a high dimensional data for financial engineers which is more suitable in the context of complex neural networks. Another important feature is to automatically download financial market data from broker. Currently, only cryptocurrency and forex data are avaiable for downloading with \textit{mercurius} package, we will try to integrate stock from NASDAQ and future contracts market information into the framework.
+
+%Description of anticipated experiments
+Previously, Jiang et al.~\cite{jiang2017cryptocurrency} performed only on cryptocurrency market because the cryptocurrency market operates 24 hours per day nonstop and without holidays. The price movements of large volume cryptocurrencies are also volatile which provide space for portfolio managers to capture the profits~\cite{jiang2017deep}. While this work aims to transfer the deterministic gradient policy (DPG) to more tradition markets, including forex, ETF funds and future contracts. Most experiments will be carried out on forex dataset with selected coin pairs. Since the publication of previous works, there are over 40 citations and in this work, we will try to compare some of the follow-up works to our methods.
+
+% Description of methods of evaluation
+To evaluate the effectiveness of algorithm, multiple metrics will be used, including the Accumulated Portfolio Value (APV), Maximum Drawdown (MDD) and the Sharpe ratio (SR). The details of metrics is described at Section~\ref{sec: evaluation}. In addition, the core deep RL algorithm will be compared against different machine learning methods as illustrated at Section~\ref{sec: system}.
+
+\subsection{Conduct of Project and Plan}
+
+\subsubsection{Background and related works}
+\label{subsub: background}
+
+Advancements of deep reinforcement learning (deep RL) have been applied to many fields, including modern computer games~\cite{mnih2015human}, ancient game of Go~\cite{silver2017mastering}, etc. and deep RL has always achieved superior performances than its human counterparts. Therefore, it is natural for us to consider applying deep RL to computational finance field as well. We consider OLPS as a challenging problem in finance and try to solve it with the state-of-the-art deep RL algorithms. There are many existing machine learning techniques in online portfolio selection~\cite{li2014online}, however, to our best knowledge, no one before us have worked on model-free deep RL method for this problem. Traditionally, asset management can be divided into two schools, Mean Variance Theory derived from financial studies~\cite{markowitz1952portfolio} and Capital Growth Theory studied by information theorists~\cite{kelly1956new, kelly2011new}. While Mean Variance Theory balances between mean (return) and variance (risk) for a single-period of an asset, Capital Growth Theory maximizes the expected growth rate of multiple period asset selection. This work, therefore, follows the latter theory since the scenarios of OLPS consists of multiple periods and assets naturally. There are four main divisions for algorithms with the aim of maximizing cumulative wealth:
+\begin{itemize}
+    \item Follow-the-Winner (invest in price rising assets).
+    \item Follow-the-Loser (invest in price dropping assets).
+    \item Pattern-Matching Approaches (predict the trends).
+    \item Meta-Learning Algorithms (algorithm of algorithms).
+\end{itemize}
+As the name indicates, "Follow-the-Winner" is set of algorithms that invest on the assets which have positive rates of return, including Universal Portfolios~\cite{cover1991universal}, Exponential Gradient~\cite{helmbold1998line}, Online Newton Step~\cite{agarwal2006algorithms} and Switching Portfolios~\cite{singer1997switching}. Anti Correlation~\cite{borodin2004can}, Passive Aggressive Mean Reversion~\cite{li2012pamr}, Confidence Weighted Mean Reversion~\cite{li2013confidence}, Online Moving Average Reversion~\cite{li2015moving}, Robust Median Reversion~\cite{huang2013robust} are under the category "Follow-the-Loser", which believes the current losing assets will become winning again or recovering to averages of certain properties. "Pattern-Matching" predicts the future price movements based on historical financial market data points. Nonparametric Kernel-based Log-optimal Strategy~\cite{gyorfi2006nonparametric}, Nonparametric Nearest Neighbor Log-optimal Strategy~\cite{gyorfi2008nonparametric} and Correlation-driven Nonparametric Learning Strategy~\cite{li2011corn} are some algorithms from this category that are selected for later experiments. For meta-learning, there are Online Gradient Updates~\cite{das2011meta} and Online Newton Updates~\cite{das2011meta}, where multiple algorithms are combined. In this work, most algorithms on OLPS toolbox~\cite{JMLR:v17:15-317} are compared with deep reinforcement learning algorithm as an evaluation method for the performance of designed algorithm.
+
+
+\subsubsection{Implementation}
+
+The implementation is mostly in Python. OLPS toolbox~\cite{JMLR:v17:15-317} is originally written in M scripts of MATLAB, while we have translated it to Python as a open-source Python module \textit{mercurius}. A benchmark strategy UCRP is shown as below.
+
+\begin{lstlisting}[language=Python, caption=Example Strategy]
+class ucrp(expert):
+    """uniform constant rebalanced portfolio"""
+    def __init__(self):
+        super(ucrp, self).__init__()
+
+    def get_b(self, data, last_b):
+        n, m = data.shape
+        return np.ones((m,1))/m
+\end{lstlisting}
+
+\subsubsection{Plan}
+\label{subsub: plan}
+
+\begin{ganttchart}[
+hgrid,
+vgrid={{red, dotted}},
+x unit=12mm,
+time slot unit=month,
+time slot format=isodate,
+vrule/.style={very thick, red}
+]{2019-09-01}{2020-04-28}
+\gantttitlecalendar{year, month} \\
+\ganttbar[bar/.append style={fill=red!50}]{back test on forex}{2019-09-01}{2020-02-01} \\
+\ganttlinkedbar[bar/.append style={fill=yellow}]{back test on stock}{2019-12-01}{2020-03-01} \\
+\ganttbar[bar/.append style={fill=green}]{refactor the framework}{2019-09-01}{2020-03-01} \\ 
+\ganttlinkedbar[bar/.append style={fill=black}]{add UI features}{2020-02-01}{2020-04-28} \\
+\ganttbar[bar/.append style={fill=blue}]{explore DQN etc.}{2020-01-01}{2020-04-28} \\ 
+\ganttvrule{Milestone: mercurius 1.1 release}{2019-12-23}
+
+\end{ganttchart}
+
+We tested all the algorithms on a server with Ubuntu 18.04 Operating System and used 4 NVIDIA 2080TI GPU for training the neural networks. Python Version is 3.7.3, the virtual environment is managed by Anaconda~\cite{anaconda}.
+
+
+\subsubsection{Risk assessment}
+
+The major challenges for this project are following:
+\begin{enumerate}
+    \item Reinforcement learning (RL) is hard to converge and thus requires many computational resources to finish the training~\cite{sutton2018reinforcement}.
+    \item Hyper-parameters are hard to tune. Combined with deep RL, even for one round of complete testing the time span will over one week~\cite{bergstra2011algorithms}.
+\end{enumerate}
+
+From the past experience, an anticipated challenge will be the tuning of hyper-parameters such as the number of layers, neurons, window size. To address the challenges mentioned above, many new knowledge and corresponding modules are acquired. For example, cutting edge hyper-parameter optimization method such as Tree-structured Parzen Estimator Approach (TPE) is employed~\cite{bergstra2011algorithms}. Besides, better understanding of finance is also required for technical engineers. Although the most work are implementation, understanding of market is vital for this project.

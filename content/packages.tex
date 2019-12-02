@@ -1,0 +1,117 @@
+\usepackage[utf8]{inputenc}
+%slippery gypsy packages that need to come first, since others call them after
+\usepackage[x11names,dvipsnames,svgnames,table]{xcolor}
+
+% general incantations
+\usepackage[export]{adjustbox}
+\usepackage{afterpage}
+
+\usepackage{graphicx}
+\usepackage{placeins}
+\usepackage{pdfpages}
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage[most]{tcolorbox}
+\usepackage{calligra}
+\usepackage{caption}
+\usepackage{datetime}
+\usepackage{dirtytalk}
+\usepackage{dsfont}
+\usepackage{etex}
+\usepackage{fancyhdr}
+\usepackage{fix-cm}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp,gensymb} %for \degree C symbol
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{transparent}
+\usepackage[everyline=true,framemethod=tikz]{mdframed}
+\usepackage{mparhack}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{parskip}
+\usepackage{lscape}
+\usepackage{pdflscape}
+\usepackage{pdfpages}
+\usepackage{placeins}
+\usepackage[document]{ragged2e}
+\usepackage{rotating}
+\usepackage{setspace}
+\usepackage{subcaption}
+\usepackage{threeparttable}
+\usepackage[normalem]{ulem}
+\usepackage{verbatim}
+\usepackage{soul} %highlighting, strike through etc.
+
+\usepackage{pgfgantt}
+
+%Automated appendices
+\usepackage[titletoc,title,header]{appendix} %advanced functionality
+
+%language settings
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+
+%page setup
+%this where we adjust the binding offset, if relevant
+\usepackage[a4paper]{geometry}
+\usepackage{lastpage} % for page 1 of n footers
+
+%maths stuff
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+
+\setcounter{secnumdepth}{5}
+
+%lists
+\usepackage{enumitem}
+
+%working collaboratively
+\usepackage[backgroundcolor=yellow]{todonotes}
+
+%reference list 
+\usepackage[backend=biber,style=ieee]{biblatex} %Sbliography with IEEE style.
+\addbibresource{content/ref.bib} %Imports bibliography file
+\urlstyle{same}
+
+% cross referencing
+\usepackage[hidelinks]{hyperref}
+\usepackage{cleveref}
+
+%line spacing
+\linespread{1.25}
+
+%New colors defined below
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% code listing style named mystyle
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolour},   commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         
+  breaklines=true,                 
+  captionpos=b,                    
+  keepspaces=true,                 
+  numbers=left,                    
+  numbersep=5pt,                  
+  showspaces=false,                
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=2
+}
+
+\lstset{style=mystyle}
+
+\usepackage{bm}
+\renewcommand{\vec}{\bm}
+\newcommand{\bcdot}{\boldsymbol{\cdot}}

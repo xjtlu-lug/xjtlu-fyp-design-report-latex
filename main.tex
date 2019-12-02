@@ -1,0 +1,41 @@
+\documentclass[12pt]{article}
+
+\input{content/packages.tex}
+
+\begin{document}
+\input{content/title.tex}
+\restoregeometry
+
+% \section*{Acknowledgments}
+% \input{1_header/acknowledgments.tex}
+% \pagebreak
+
+\setcounter{tocdepth}{5}
+\tableofcontents
+\pagebreak
+
+% \listoffigures
+% \listoftables
+% \pagebreak
+
+\justify
+
+% \section*{Abstract}
+% \input{1_header/abstract.tex}
+% \pagebreak
+
+\section{Specification}
+\input{content/specification.tex}
+
+\section{Design}
+\input{content/design.tex}
+
+\section{Review} % project plan review
+\input{content/review.tex}
+
+
+\section{References}
+\label{sec:ref}
+\printbibliography[heading=none]
+
+\end{document}
